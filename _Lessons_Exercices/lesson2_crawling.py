@@ -54,8 +54,8 @@ all_pages_people_2 = getListOfArticlesForPeople('angelina')
 #shares_people_1 = []
 shares_people_2 = []
 for page in all_pages_people_2:
-  print '-----'
-  print page
+  print('-----')
+  print(page)
   share = getNumberOfSharesForPage("http://www.purepeople.com" + page, share_class_pp)
-  print share
+  print(share)
   shares_people_2.append(share)
