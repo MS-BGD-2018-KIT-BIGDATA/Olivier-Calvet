@@ -1,11 +1,12 @@
 import requests
 import re
-import pprint
+from token_olivier import get_token_olivier
 from bs4 import BeautifulSoup
 import pandas as pd
 from multiprocessing import Pool
 import time
 
+my_token = get_token_olivier()
 
 def getSoupFromURL(url, method='get', data={}):
     if method == 'get':
@@ -37,7 +38,8 @@ def get_top_contribs():
 
 
 def get_user_repos_avg_stargazers(username):
-    my_headers = {'Authorization': 'token 8d4b3d71a772bb928182cb04e3211e63936deb62'}
+    # token needs to be regenerated each time : https://github.com/settings/tokens
+    my_headers = {'Authorization': 'token {}'.format(my_token)}
     r = requests.get("https://api.github.com/users/{}/repos".format(username)
                      , headers=my_headers
                      )
@@ -89,5 +91,5 @@ if __name__ == '__main__':
 
     res = parrallel_attempt()
     print("Top 256 contributors of 'https://gist.github.com/paulmillr/2657075'",
-          " rank by the average stargazers of their repos : \n")
+          "ranked by the average stargazers of their repos :\n")
     print(res)
